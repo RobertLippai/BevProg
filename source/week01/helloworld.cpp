@@ -1,8 +1,9 @@
-#include "std_lib_facilities.h"
+#include "../std_lib_facilities.h"
 
 int main(){
 
 	cout << "Hello, world!\n";
+	cout << "Tesztelés.\n";
 
 	return 0; // A program rendben lefutott, ha valami nem lenne jó return -1;
 }
