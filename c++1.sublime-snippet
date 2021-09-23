@@ -5,10 +5,7 @@
 int main(){
 	return 0;
 }]]></content>
-
 	<tabTrigger>bevprog</tabTrigger>
-    <!-- Optional: Scope the tab trigger will be active in -->
     <scope>source.c++</scope>
-    <!-- Optional: Description to show in the menu -->
     <description>Bevezetés a Programozásba Snippet</description>
 </snippet>
