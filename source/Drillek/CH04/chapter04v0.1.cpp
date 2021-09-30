@@ -30,17 +30,3 @@ int main(){
 	
 	return 0;
 }
-
-
-/*
-1-5 az elso fajl
-
-Aztan masik fajl V0.2 
-double, 2 változo de csak egyet kerunk be. 
-Aztan tracklje az eddigieket. es ha az eddigi legnagyobb szam irja ki
-
-9es átváltani méterbe
-
-10-11es csütörtökön csak
-
-*/
