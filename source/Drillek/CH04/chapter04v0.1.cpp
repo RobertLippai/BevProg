@@ -8,9 +8,11 @@ int main(){
 
 	while(cin >> a >> b){
 		cout << "\n";
-		
+				
 		if(a == b){
 			cout << "the numbers are equal" << "\n";
+		} else if(abs(a-b) < 1.0/100){
+			cout <<  "the numbers are almost equal" << "\n";
 		} else if(a > b){
 			cout << "the smaller value is: " << b << "\n";
 			cout << "the larger value is: " << a << "\n";
@@ -18,10 +20,6 @@ int main(){
 			cout << "the smaller value is: " << a << "\n";
 			cout << "the larger value is: " << b << "\n";
 		}
-		
-		if(abs(a-b) < 1.0/100){
-			cout <<  "the numbers are almost equal" << "\n";
-		} 
 
 		cout << "\n" << "Enter two number: "; 
 	}

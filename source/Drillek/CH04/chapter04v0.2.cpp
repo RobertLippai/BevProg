@@ -66,7 +66,7 @@ int main(){
 
 			cout << "\n";
 			
-			cout << "You have entered the following number: " << a;
+			cout << "You have entered the following number: " << a << "\n";
 			
 			if(a < smallest){
 				cout << "This is the smallest so far.\n";

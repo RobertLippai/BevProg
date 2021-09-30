@@ -64,3 +64,6 @@ int square(int x){
 vector<type> name //declare
 
 push_back(value) //store the value of temp in the vector
+
+# cerr - standard error output
+
