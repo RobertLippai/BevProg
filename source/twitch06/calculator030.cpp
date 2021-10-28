@@ -23,6 +23,7 @@ public:
 	Token_stream();
 	Token get();
 	void putback(Token t);
+	void ignore(char c);
 private:
 	bool full;
 	Token buffer;
@@ -81,6 +82,20 @@ Token Token_stream::get() {
 	}
 }
 
+void Token_stream::ignore(char c){
+	if(full && c == buffer.kind){
+		full = false;
+		return;
+	}
+
+	full = false;
+
+	char ch = 0;
+	while(cin >> ch){
+		if(ch == c) return;
+	}
+}
+
 Token_stream ts;
 
 double primary(){
@@ -96,7 +111,12 @@ double primary(){
 		}
 		case number:
 			return t.value;
+		case '-':
+			return - primary();
+		case '+':
+			return primary();
 		default:
+			ts.putback(t);
 			error("primary expected");
 			return 0;
 	}
@@ -117,7 +137,7 @@ double term(){
 			{
 				double d = primary();
 				if(d == 0) error("Zero value in /");
-				left /= primary();
+				left /= d;
 				t = ts.get();
 				break;
 			}
@@ -165,25 +185,34 @@ double expression(){
 	}
 }
 
+void clean_up_mess(){
+	ts.ignore(print);
+}
+
+void calculate(){
+
+	while(cin)
+	try{
+		Token t = ts.get();
+		while(t.kind == print) t = ts.get();
+		if(t.kind == quit){
+			return;
+		}
+		ts.putback(t);
+		cout << "=" << expression() << '\n';
+	} catch (exception& e){
+		cerr << e.what() << '\n';
+		clean_up_mess();
+	}
+}
+
 int main()
 try{
-	double val = 0;
 
-	while(cin){
-		Token t = ts.get();
-		if(t.kind == quit){
-			break;
-		}
-		if(t.kind == print){
-			cout << "=" << val << '\n';
-		} else {
-			ts.putback(t);
-		}
-		val = expression();
-
-	}
+	calculate();
 	
 	return 0;
+
 } catch (exception& e){
 	cerr << "Error: " << e.what() << '\n';
 	return 1;
