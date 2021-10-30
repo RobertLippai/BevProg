@@ -51,10 +51,12 @@ constexpr char print = ';';
 constexpr char name = 'a';
 constexpr char let = '#';
 constexpr char sq = 'Q';
+constexpr char pw = 'P';
 constexpr char result = '=';
 constexpr char quit_c = 'q';
 
 const string sqrtkey = "sqrt";
+const string powkey = "pow";
 const string quit = "exit";
 
 //function declarations
@@ -163,6 +165,7 @@ Token Token_stream::get()
 		case '%':
 		case '=':
 		case '#':
+		case ',':
 			return Token(ch);
 		case '.':
 		case '0': case '1': case '2': case '3': case '4':
@@ -183,6 +186,7 @@ Token Token_stream::get()
     			cin.putback(ch);
     			if (s == quit) return Token{quit_c};
     			if (s == sqrtkey) return Token{sq};
+    			if (s == powkey) return Token{pw};
     			else if (is_declared(s))
     				return Token(number, get_value(s));
     			return Token{name,s};
@@ -275,10 +279,27 @@ double primary()
         {
             double d = primary();
             if (d < 0){
-            	error("sqrt(): Use a number above 0.");
+            	error("sqrt(): Must be a number above 0.");
             } 
             return sqrt(d);
         }
+
+        case pw:
+        {
+        	t = ts.get();        	
+			if (t.kind != '(') error("'(' expected");
+			double x = expression();
+			t = ts.get();
+			if (t.kind != ',') error("',' expected");
+
+			double y = narrow_cast<int>(expression());	
+
+			t = ts.get();
+			if (t.kind != ')') error("')' expected");
+
+        	return pow(x,y);
+        }
+
 
 		default:
 			error("primary expected");

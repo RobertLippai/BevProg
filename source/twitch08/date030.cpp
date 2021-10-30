@@ -115,11 +115,38 @@ ostream& operator<<(ostream& os, const UDChrono::Date& d)
 	return os << d.get_year() << ". " << d.get_month() << " " << d.get_day() << ".\n";
 }
 
+istream& operator>>(istream& is, UDChrono::Date & dd){
+	// 2021.10.31
+	int y, m, d;
+	char ch1, ch2;
+	is >> y >> ch1 >> m >> ch2 >> d;
+
+	if(!is){
+		return is;
+	}
+	if(ch1 != '.' || ch2 != '.'){
+		is.clear(ios_base::failbit);
+		return is;
+	}
+	
+	dd = UDChrono::Date{UDChrono::Year{y}, UDChrono::Month(m-1), d};
+
+	return is;
+}
+
 int main()
 try {
 	UDChrono::Date today {UDChrono::Year{2021}, UDChrono::Month::dec, 31};
 
 	cout << "Date: " << today;
+
+	UDChrono::Date tomorrow;
+
+	cout << "Please enter a date in YYYY.MM.DD format...\n";
+
+	cin >> tomorrow;
+
+	cout << tomorrow;
 
 	return 0;
 
