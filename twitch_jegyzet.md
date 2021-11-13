@@ -125,3 +125,10 @@ Szegmensenként érvényes, az using direktivától
 
 feltétel ? igaz esetén : hamis esetén elágazási szerkezet
 
+# Memória labor
+
+## Free Store:
+Ha azt akarjuk, hogy az objektum túlélje a scope-ot amiben létrehoztuk.
+
+Ha new-al foglalunk utána Deletelni kell
+
