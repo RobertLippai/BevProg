@@ -11,10 +11,17 @@ vector<Point> readVectorFromConsole(int number){
 
 	cout << "Please enter " << number << " (x,y) pairs: \n";
 
-	int a,b,counter = 0;
+	int x,y,counter = 0;
+	char a, b, c;
 
-	while(counter < number && cin >> a >> b){
-		vector_buffer.push_back(Point{a,b});
+	//a=(
+	//x=x
+	//b=,
+	//y=y
+	//b=)
+
+	while(counter < number && cin >> a >> x >> b >> y >> c){
+		vector_buffer.push_back(Point{x,y});
 		counter++;
 	}
 
@@ -23,7 +30,7 @@ vector<Point> readVectorFromConsole(int number){
 	return vector_buffer;
 }
 
-void printVector(vector<Point>& dataholder ){
+void printVector(const vector<Point>& dataholder ){
 	cout << "This is how our vector looks like: \n";
 
 	for(const auto& p : dataholder){
@@ -33,7 +40,7 @@ void printVector(vector<Point>& dataholder ){
 	cout << "\n";
 }
 
-void printVector(vector<Point>& dataholder, vector<Point> dataholder2){
+void printVector(const vector<Point>& dataholder, const vector<Point>& dataholder2){
 	cout << "First Vector: \n";
 
 	for(const auto& p : dataholder){
@@ -49,7 +56,7 @@ void printVector(vector<Point>& dataholder, vector<Point> dataholder2){
 	cout << "\n";
 }
 
-void writeVector(vector<Point>& dataholder, string filename){
+void writeVector(const vector<Point>& dataholder, string filename){
 	ofstream ost {filename};
 
 	for(const auto& p : dataholder){
@@ -64,8 +71,13 @@ vector<Point> readVectorFromFile(string filename){
 
 	ifstream ifile {filename};
 
-	if(!ifile) error("Can't open ifile ", filename);
+	if(!ifile) error("Can't open file ", filename);
 	
+	//a=(
+	//x=x
+	//b=,
+	//y=y
+	//b=)
 	int x,y; 
 	char a, b ,c;
 
@@ -76,7 +88,7 @@ vector<Point> readVectorFromFile(string filename){
 	return vector_buffer;
 }
 
-bool compareVectors (vector<Point> vector_a, vector<Point> vector_b){
+bool compareVectors (vector<Point>& vector_a, vector<Point>& vector_b){
 	//cout << "Size: vector_a: " << vector_a.size() << '\n';
 	//cout << "Size: vector_b: " << vector_b.size() << '\n';
 
