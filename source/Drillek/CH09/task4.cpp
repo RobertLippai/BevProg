@@ -1,26 +1,5 @@
 #include "../std_lib_facilities.h"
 
-class Year {
-	static constexpr int min = 1800;
-	static constexpr int max = 2200;
-public:
-	class Invalid{};
-	Year(int x): y{x} {if (x < min || x > max) throw Invalid{}; }
-	int year() { return y; }
-	int increment() { y++; }
-private:
-	int y;
-};
-
-Year operator++(Year& year){
-	year.increment();
-	return year;
-}
-
-ostream& operator<<(ostream& os, Year year){
-	return os << year.year();
-} 
-
 const vector<string> months = 
 {
 	"January",
@@ -38,7 +17,7 @@ const vector<string> months =
 };
 
 enum class Month {
-	jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec
+	jan, feb, mar, apr, may, june, july, aug, sept, oct, nov, dec
 };
 
 Month operator++(Month& m)
@@ -52,28 +31,29 @@ ostream& operator<<(ostream& os, Month m)
 	return os << months[int(m)];
 }
 
-class Date {
+struct Date
+{
 private:
-	Year year;
-	Month month;
-	int day;
+	int year; //year
+	Month month; //month
+	int day; //day
+
 public:
 	class Invalid {};
-
-	Date(): year(Year{2001}), month(Month::jan), day(1) {}
-
-
-	Date(Year y, Month m, int d): year(y), month(m), day(d) { if (!is_valid()) throw Invalid {}; }
-	void add_day(int n);
-
+	//constructor
+	Date(int y, Month m, int d): year(y), month(m), day(d) { if (!is_valid()) throw Invalid {}; }
+	
 	bool is_valid();
 
-	Year get_year() const { return year; }
-	Month get_month() const { return month; }
-	int get_day() const { return day; }
+	void add_day(int n);
+	int get_year() { return year; }
+	Month get_month() { return month; }
+	int get_day() { return day; }
 
-	void set_year(Year y){
-		year = y;
+	void set_year(int y){
+		if(y > 0){
+			year = y;
+		} else error("Invalid year in set_year().");
 	}
 
 	void set_month(Month m){
@@ -82,39 +62,37 @@ public:
 
 	void set_day(int d){
 		if(d > 0 && d <= 31){
-			day = d; 
-		} else error("Invalid day in set_day(). ");
+			day = d;
+		} else error("Invalid day in set_day().");
 	}
 };
 
 bool Date::is_valid()
 {
-	if (day < 1 || day > 31) return false;
+	if (year < 1 || day < 1 || day > 31) return false;
 	return true;
 }
 
-void Date::add_day(int n)
-{
+void Date::add_day(int n){
 	day += n;
-	if (day > 31) 
-	{
+	if(day > 31){
 		++month;
 		day -= 31;
-		if (month == Month::jan)
-		{
-			++year;
+
+		if(month == Month::jan){
+			year++;
 		}
 	}
 }
 
-ostream& operator<<(ostream& os, const Date& d) {
+ostream& operator<<(ostream& os, Date& d) {
 	return os << '(' << d.get_year() << ',' << d.get_month() << ',' << d.get_day() << ')';
 }
 
 int main()
-try {
-
-	Date today (Year{1978}, Month::jun, 25);
+try{
+	
+	Date today (1978, Month::june, 25);
 
 	Date tomorrow = today;
 	tomorrow.add_day(1);
@@ -124,16 +102,7 @@ try {
 
 	return 0;
 
-} catch (Year::Invalid) {
-	cout << "Error: Invalid year\n";
-	return 1; 
-} catch (Date::Invalid) {
-	cout << "Error: Invalid date\n";
-	return 2; 
-} catch (exception& e) {
-	cout << "Error: " << e.what() << endl;
-	return 3;
-} catch (...) {
-	cerr << "Some error" << '\n';
-	return 3;
+} catch (exception& e){
+	cerr << e.what() << '\n';
+	return 1;
 }

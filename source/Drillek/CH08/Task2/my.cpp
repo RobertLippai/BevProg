@@ -16,12 +16,16 @@ void swap_v(int a, int b){
 	temp = a;
 	a = b;
 	b = temp;
+
+	cout << "The value of X: " << a << " The value of Y: " << b << '\n';
 }
 void swap_r(int& a, int& b){
 	int temp;
 	temp = a;
 	a = b;
 	b = temp;
+
+	cout << "The value of X: " << a << " The value of Y: " << b << '\n';
 }
 
 //Can't compile beacuse of the const ints
