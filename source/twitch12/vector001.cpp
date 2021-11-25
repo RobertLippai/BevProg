@@ -5,6 +5,10 @@ class My_vector {
 	int sz;
 	double* elem;
 
+	void debug(const string& s){
+		cerr << this << "->" << s << " elem ptr: " << elem << '\n';
+	}
+	
 public:
 	My_vector(int s): sz{s}, elem{new double[s]}
 	{

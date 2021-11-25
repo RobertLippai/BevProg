@@ -31,7 +31,7 @@ void print_array(ostream& os, int* a, int n){
 	cout << "]\n\n";
 }
 
-void print_vector(ostream& os, vector<int> v){
+void print_vector(ostream& os, const vector<int>& v){
 	cout << "<";
 
 	for (int i = 0; i < v.size(); ++i)
@@ -53,6 +53,15 @@ void fillArray(int a[], int elements){
 		a[i] = (100 + i);
 	}
 	
+}
+
+//implement fillVector
+
+void fillVector(vector <int>& a, int elements){
+	for (int i = 0; i < elements; ++i)
+	{
+		a.push_back((100 + i));
+	} 
 }
 
 int main(){
@@ -81,66 +90,70 @@ int main(){
 	delete[] int_array;
 
 	//Task 5
+	cout << "Task 5 [Array]:\n";
+
 	int* int_array_five = new int[10];
 	fillArray(int_array_five, 10);
 
-	cout << "Array: Task 5:\n";
 	print_array10(cout, int_array_five);
 
 	delete[] int_array_five;
 
 
 	//Task 6
+	cout << "Task 6 [Array]:\n";
+
 	int* int_array_six = new int[11];
 	fillArray(int_array_six, 11);
 
-	cout << "Array: Task 6:\n";
 	print_array(cout, int_array_six, 11);
 
 	delete[] int_array_six;
 
 
 	//Task 8
+	cout << "Task 8 [Array]:\n";
+
 	int* int_array_eight = new int[20];
 	fillArray(int_array_eight, 20);
 
-
-	cout << "Array: Task 8:\n";
 	print_array(cout, int_array_eight, 20);
 
 	delete[] int_array_eight;
 
 
+
+	//
+	// Vector Task 10
+	//
+
 	//Task 5 Vector
+	cout << "Task 5 [Vector]:\n";
+
 	vector<int> vector_array_five;
 
-	for (int i = 0; i < 10; ++i)
-	{
-		vector_array_five.push_back((100 + i));
-	} 
+	fillVector(vector_array_five, 10);
 
-	cout << "Vector: Task 5:\n";
 	print_vector(cout, vector_array_five);
+
 
 
 	//Vector Task 6
-	vector<int> vector_array_six;
-	for (int i = 0; i < 11; ++i)
-	{
-		vector_array_five.push_back((100 + i));
-	} 
+	cout << "Task 6 [Vector]:\n";
 
-	cout << "Vector: Task 6:\n";
+	vector<int> vector_array_six;
+
+	fillVector(vector_array_six, 11);
+
 	print_vector(cout, vector_array_five);
 
 	//Vector Task 8
+	cout << "Task 8 [Vector]:\n";
+
 	vector<int> vector_array_eight;
-	for (int i = 0; i < 20; ++i)
-	{
-		vector_array_eight.push_back((100 + i));
-	} 
+
+	fillVector(vector_array_eight, 20);
 	
-	cout << "Vector: Task 8:\n";
 	print_vector(cout, vector_array_eight);
 
 	return 0;
