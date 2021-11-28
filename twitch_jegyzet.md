@@ -132,3 +132,63 @@ Ha azt akarjuk, hogy az objektum túlélje a scope-ot amiben létrehoztuk.
 
 Ha new-al foglalunk utána Deletelni kell
 
+# 19.5-ös kell 
+A templatek majd prog1en.
+
+# Prezentácó:
+
+* Változtatható legyen a vektor mérete
+* Működjön többféle típusra is ne csak doublekre
+
+Mi a változtatható mérettel, a range checkingel és a kivételekkel foglalkozunk.
+
+## resize és push_back:
+A new és delete nagyon erőforrásigényes, ezért jó lenne ha nem kellene minden egyes híváskor ezt elvégezni.
+Ezért amikor pl. betellik egy 10 elemű vektor, nem 11-elemnek foglalunk helyet hanem 20-nak. Így nem kell minden egyes alkalomkor lefoglalni. Mert elég akkor ha a 20 elemű betelt. 
+
+Így ketté van osztva a vektor: egy olyan részre amit ténylegesen használunk, és egy olyanra ahol csak előre levannak a helyek foglalva.
+
+
+és másolás
+
+## Reserve függvény: Nem módosít semmit, csak memóriát alokkál. 
+Előtte megnézni, hogy nehogy kevesebb területre foglaljunk területet, mint most van, mert akkor elvesznének elemek a vektorból.
+Foglal területet, majd átmásoljuk a régi vektorból az eleemeket, törli a régi mem. területet és végül átállítja a mutatót az új területre.
+
+## Resize függvény: Ez már nem memória foglalás, hanem, hogy ténylegesen hány elem van a vektorban
+Az új elemeket kinulláza, (amennyivel nevüljük csak azokat!) A régiek ugyanúgy maradnak.
+A size-ot beállítjuk az új méretre, annyire amivel átakartuk méretezni.
+
+## Push_Back függvény:
+Átadunk neki egy számot pl.
+Megnézni, hogy nem e üres a vektor, ha igen foglal memóriát pl. 8 elemnek.
+Majd megnézi, hogy pontsan annyi vektorunk van e mint amit lefoglaltunk: ha igen foglal 2x annyi helyet 
+Majd átálítja az utolsó értéket a megadott számra és eggyel növeli a size-ot.
+
+## This pointer:
+Minden osztálynak, típusnak tagja. Az adott objektum címét adja vissza az osztályon belül.
+
+## Assignment Optimalizálása
+(Copy and swap)-van alapból. Lemásoljuk az elemeket aztán swap-eljük a pointert de ez nem mindig hatékony
+
+Ha saját magunkra akarunk másolni: return *this; self referencia visszadása*
+
+Ha van elegendő helyünk: azaz amit átakarunk másolni kisebb vagy egyenlő, mint amink van. 
+Ekkor csak másoljuk az elemeket, mert van elegendő mem. majd  a free-spacet megnöveljük, a size-ot átírjuk.
+
+### 19.3as fejezet a templatek
+
+## 19.5-ös drill
+New-el foglalunk, akkor majd felkell szabadítani
+
+unique pointer: 
+std::unique_ptr<vector<int>>
+Egy unique pointer ami egy int vectorra fog mutatni
+
+
+## sus4 és sus5 kell majd védésen
+
+## Unique Ptr Függvény:
+készít egy unique_ptr-t olyan típussal amit a jobb oldalán adunk meg neki (= jel)
+pl. egy vector<int> -nek foglalal memóriát
+

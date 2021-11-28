@@ -1,0 +1,23 @@
+#include "../std_lib_facilities.h"
+
+void suspicious(int size, int x){
+	int* p = new int[size];
+
+	//the exception cancels the delete[] p -> leads to memory leak.
+	if(x == 0){
+		throw std::exception();
+	}
+
+	delete[] p;
+}
+
+int main()
+try {
+	
+	suspicious(5, 0);
+	
+	return 0;
+} catch (std::exception& e){
+	std::cerr << e.what() << '\n';
+	return 1;
+}
