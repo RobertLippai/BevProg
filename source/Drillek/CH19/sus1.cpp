@@ -18,6 +18,6 @@ try {
 	
 	return 0;
 } catch (std::exception& e){
-	std::cerr << e.what() << '\n';
+	std::cerr << "Error!\n";
 	return 1;
 }
