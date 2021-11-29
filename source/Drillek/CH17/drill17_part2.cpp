@@ -53,6 +53,7 @@ try{
 	int* p3 = p2;
 
 	//Task 6
+	delete[] p1;
 	p1 = p2;
 
 	//Task 7
@@ -69,7 +70,6 @@ try{
 	
 	//Task 9
 	delete[] p2;
-	p3 = 0; //talán
 	
 	//Task 10
 	p1 = new int[10] {1,2,4,8,9,72,99, 32, 29, 10};
@@ -85,7 +85,6 @@ try{
 	cout << "The copied array elements: ";
 	print_array(cout, p2, 10);
 
-	//possible memory leak?
 	delete[] p1;
 	delete[] p2;
 
